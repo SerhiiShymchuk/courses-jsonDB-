@@ -1,0 +1,29 @@
+<h1>Список курсів</h1>
+
+<div class="row">
+{{#if arrCourses.length}}
+{{#each arrCourses}}
+    <div class="col s4">
+      <div class="card">
+        <div class="card-image">
+          <img src="{{img}}" alt="{{title}}">
+        </div>
+        <div class="card-content">
+          <span class="card-title">{{title}}</span>
+          <p class="price">{{price}}</p>
+        </div>
+        <div class="card-action actions">
+          <a href="/courses/{{id}}" target="_blank">Відкрити</a>
+          <a href="/courses/{{id}}/edit?allow=true">Редагувати</a>
+          <form action="/card/add" method="post">
+            <input type="text" hidden name="id" value="{{id}}">
+            <button type="submit" class="btn btn-primary">Купити</button>
+          </form>
+        </div>
+      </div>
+    </div>
+{{/each}}
+{{else}}
+<pre>курси відсутні</pre>
+{{/if}}
+</div>
