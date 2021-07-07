@@ -15,14 +15,17 @@
                     <td>{{title}}</td>
                     <td>{{count}}</td>
                     <td>
-                        <button class="btn btn-small js-remove" data-id="{{id}}">Видалити</button>
+                        <button class="btn btn-small js-remove" data-id="{{_id}}">Видалити</button>
                     </td>
                 </tr>
             {{/each}}
             </tbody>
         </table>
         <p ><strong>Ціна: </strong><span class="price">{{price}}</span></p>
+        <form action="/order" method="post">
+            <button class="btn" type="submit">Замовити</button>
+        </form>
     {{else}}
         <p>Кошик пустий</p>
     {{/if}}
-</вш>
+</div>

@@ -1,25 +1,29 @@
 <h1>Редагувати курси</h1>
 <p><a href="/">на головну</a></p>
-<form action="/courses/{{course.id}}/edit" method="POST">
+<form action="/courses/{{course._doc._id}}/edit" method="POST">
     <div class="input-field">
-        <input name="title" id="title" type="text" class="validate" required value="{{course.title}}">
+        <input name="title" id="title" type="text" class="validate" required value="{{course._doc.title}}">
         <label for="title">Назва курсу</label>
         <span class="helper-text" data-error="Введіть назву курсу" ></span>
     </div>
     
     <div class="input-field">
-        <input name="price" id="price" type="number" class="validate" required min="1" value="{{course.price}}">
+        <input name="price" id="price" type="number" class="validate" required min="1" value="{{course._doc.price}}">
         <label for="name">Ціна курсу</label>
         <span class="helper-text" data-error="Введіть ціну курсу" ></span>
     </div>
     
     <div class="input-field">
-        <input name="img" id="img" type="text" class="validate" required value="{{course.img}}">
+        <input name="img" id="img" type="text" class="validate" required value="{{course._doc.img}}">
         <label for="img">URL курсу</label>
         <span class="helper-text" data-error="Введіть шлях до картинки" ></span>
     </div>
-    <input name="id" type="hidden" value="{{course.id}}">
+    <input name="id" type="hidden" value="{{course._doc._id}}">
 
 
     <button class="btn btn-primary">Редагувати</button>
+</form>
+<form action="/courses/remove" method="POST">
+    <input type="hidden" name="id" value="{{course._doc._id}}">
+    <button class="btn red">Видалити</button>
 </form>

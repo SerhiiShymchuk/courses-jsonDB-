@@ -22,6 +22,11 @@
         {{else}}
             <li><a href="/card">Кошик</a></li>
         {{/if}}
+         {{#if isorder}}
+            <li class="active"><a href="/order">Замовлення</a></li>
+        {{else}}
+            <li><a href="/order">Замовлення</a></li>
+        {{/if}}
       </ul>
     </div>
   </nav>

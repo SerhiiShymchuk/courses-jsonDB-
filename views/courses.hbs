@@ -1,22 +1,24 @@
 <h1>Список курсів</h1>
 
 <div class="row">
-{{#if arrCourses.length}}
-{{#each arrCourses}}
+{{!--#if arrCourses.length}}
+{{#each arrCourses--}}
+{{#if courses.length}}
+{{#each courses}}
     <div class="col s4">
       <div class="card">
         <div class="card-image">
-          <img src="{{img}}" alt="{{title}}">
+          <img src="{{_doc.img}}" alt="{{_doc.title}}">
         </div>
         <div class="card-content">
-          <span class="card-title">{{title}}</span>
-          <p class="price">{{price}}</p>
+          <span class="card-title">{{_doc.title}}</span>
+          <p class="price">{{_doc.price}}</p>
         </div>
         <div class="card-action actions">
-          <a href="/courses/{{id}}" target="_blank">Відкрити</a>
-          <a href="/courses/{{id}}/edit?allow=true">Редагувати</a>
+          <a href="/courses/{{_doc._id}}" target="_blank">Відкрити</a>
+          <a href="/courses/{{_doc._id}}/edit?allow=true">Редагувати</a>
           <form action="/card/add" method="post">
-            <input type="text" hidden name="id" value="{{id}}">
+            <input type="text" hidden name="id" value="{{_doc._id}}">
             <button type="submit" class="btn btn-primary">Купити</button>
           </form>
         </div>

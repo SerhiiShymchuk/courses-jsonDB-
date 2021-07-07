@@ -4,7 +4,7 @@ const converter = (price) => {
         currency: 'USD',
         maximumFractionDigits: 0,
     }).format(price)
-}
+};
 [...document.querySelectorAll('.price')].forEach(node => {
     node.innerText = converter(node.innerText)
 })
@@ -15,7 +15,7 @@ $card.addEventListener('click', (e) => {
         console.log(e.target)
         const id = e.target.dataset.id
         fetch(`/card/remove/${id}`, {
-            method: 'delete',
+            method: 'DELETE',
         }).then(res => res.json())
         .then(card => {
             if (card.courses.length) {
