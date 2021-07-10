@@ -3,7 +3,7 @@ const { ObjectId } = Types
 const { Router } = require('express')
 const router = Router()
 const Course = require('../models/course')
-
+const authProtect = require('../middleware/authProtect')
 
 router.get('', async (req, res) => {
     //const course = new Course()
@@ -26,7 +26,7 @@ router.get('/:id', async (req, res) => {
         course,
     })
 })
-router.get('/:id/edit', async (req, res) => {
+router.get('/:id/edit', authProtect, async (req, res) => {
     if (!req.query.allow) res.redirect('/')
 
     // const courses = new Course()
@@ -37,7 +37,7 @@ router.get('/:id/edit', async (req, res) => {
         course,
     })
 })
-router.post('/:id/edit', async (req, res) => {
+router.post('/:id/edit', authProtect, async (req, res) => {
     // const course = new Course()
     // console.log(`---- req.body ----`)
     // console.log(req.body)
@@ -47,7 +47,7 @@ router.post('/:id/edit', async (req, res) => {
     await Course.findByIdAndUpdate(id, req.body)
     res.redirect('/courses')
 })
-router.post('/remove', async (req, res) => {
+router.post('/remove', authProtect, async (req, res) => {
     try {
         await Course.deleteOne({ _id: new ObjectId(req.body.id) })
         res.redirect('/courses')

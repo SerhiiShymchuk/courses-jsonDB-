@@ -1,14 +1,15 @@
 const { Router } = require('express')
 const router = Router()
 const Course = require('../models/course')
+const authProtect = require('../middleware/authProtect')
 
-router.get('', (req, res) => {
+router.get('', authProtect, (req, res) => {
   res.render('add', {
     title: 'Додати курси', isadd: true
   })
   //res.sendFile(path.join(__dirname, 'views', 'about.html'))
 })
-router.post('', async (req, res) => {
+router.post('', authProtect, async (req, res) => {
   //console.log(req.body, req.user)
   const { title, price, img } = req.body
   //const course = new Course(title, price, img)

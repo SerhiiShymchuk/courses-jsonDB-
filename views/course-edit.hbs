@@ -19,11 +19,12 @@
         <span class="helper-text" data-error="Введіть шлях до картинки" ></span>
     </div>
     <input name="id" type="hidden" value="{{course._doc._id}}">
-
+    <input type="hidden" name="_csrf" value="{{csrf}}">
 
     <button class="btn btn-primary">Редагувати</button>
 </form>
 <form action="/courses/remove" method="POST">
     <input type="hidden" name="id" value="{{course._doc._id}}">
+    <input type="hidden" name="_csrf" value="{{csrf}}">
     <button class="btn red">Видалити</button>
 </form>

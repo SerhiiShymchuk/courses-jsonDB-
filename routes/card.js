@@ -3,10 +3,11 @@ const Course = require('../models/course')
 //const Card = require('../models/card')
 //const course = require('../models/course')
 const router = Router()
+const authProtect = require('../middleware/authProtect')
 const util = require('util')
 const sleep = util.promisify(setTimeout)
 
-router.post('/add', async (req, res) => {
+router.post('/add', authProtect, async (req, res) => {
     // const courses = new Course()
     // const card = new Card()
     // const course = await courses.getById(req.body.id)
@@ -16,7 +17,7 @@ router.post('/add', async (req, res) => {
     await req.user.addToCart(course)
     res.redirect('/card')
 })
-router.get('/', async (req, res) => {
+router.get('/', authProtect, async (req, res) => {
     // const cards = new Card()
     // const card = await cards.fetch()
     // res.render('card', {
@@ -38,7 +39,7 @@ router.get('/', async (req, res) => {
         iscard: true,
     })
 })
-router.delete('/remove/:id', async (req, res)=> {
+router.delete('/remove/:id', authProtect, async (req, res)=> {
     // const cards = new Card()
     // const card = await cards.delete(req.params.id)
     // res.status(200).json(card)
@@ -51,7 +52,7 @@ router.delete('/remove/:id', async (req, res)=> {
     }))
     const cart = {
         courses,
-        count: countPrice(courses)
+        price: countPrice(courses)
     }
     res.status(200).json(cart)
 })
