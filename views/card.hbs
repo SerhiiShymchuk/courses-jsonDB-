@@ -26,6 +26,7 @@
         </table>
         <p ><strong>Ціна: </strong><span class="price">{{price}}</span></p>
         <form action="/order" method="post">
+            <input type="hidden" name="_csrf" value="{{csrf}}">
             <button class="btn" type="submit">Замовити</button>
         </form>
     {{else}}

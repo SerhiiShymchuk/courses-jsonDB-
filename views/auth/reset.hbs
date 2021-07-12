@@ -1,0 +1,19 @@
+<div class="row auth">
+    
+    <div class="col s6 offset-s3">
+        {{#if error}}
+        <p class="alert">{{error}}</p>
+        {{/if}}
+        <h3>Забули пароль?</h3>
+        <form action="/auth/reset" method="POST">
+        <div class="input-field">
+            <input name="email" id="email" type="email" class="validate" required>
+            <label for="email">Email</label>
+            <span class="helper-text" data-error="Введіть email" ></span>
+        </div>
+        
+        <input type="hidden" name="_csrf" value="{{csrf}}">
+        <button class="btn btn-primary" type="submit">Відновити</button>
+        </form>
+    </div>
+</div>

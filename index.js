@@ -1,3 +1,4 @@
+const keys = require('./keys/config')
 const express = require('express')
 const path = require('path')
 const app = express()
@@ -16,15 +17,14 @@ const MongoStore = require('connect-mongodb-session')(session)
 const varMiddleware = require('./middleware/middlewares')
 //const User = require('./models/user')
 const userMiddleware = require('./middleware/user')
-const PORT = process.env.PORT || 3009
-const passMongo = '85hevFHBVxIqZ2tp'
-const userNameMongo = 'admin'
-const url = `mongodb+srv://${userNameMongo}:${passMongo}@cluster0.hdehi.mongodb.net/shop`
+const errorPage = require('./middleware/errorPage')
+
 
 
 const hbs = exphbs.create({
   defaultLayout: 'main',
   extname: 'hbs',
+  helpers: require('./utils/helper-hbs')
 })
 app.engine('hbs', hbs.engine)
 app.set('view engine', 'hbs')
@@ -43,11 +43,11 @@ app.use(express.urlencoded({extended: true}))
 //   }
 // })
 const store = new MongoStore({
-  uri: url,
+  uri: keys.url,
   collection: 'sessions',
 })
 app.use(session({
-  secret: 'some text',
+  secret: keys.secret,
   resave: false,
   saveUninitialized: false,
   store,
@@ -62,6 +62,7 @@ app.use('/courses', coursesRoute)
 app.use('/card', cardRoute)
 app.use('/order', orderRoute)
 app.use('/auth', authRoute)
+app.use(errorPage)
 // app.get('/about/contacts.js', (req, res) => {
   //   res.sendFile(path.join(__dirname, 'views', 'contacts.js'))
   // })
@@ -70,24 +71,13 @@ app.use('/auth', authRoute)
 start()
 async function start() {
   try {
-    await mongoose.connect(url, {
+    await mongoose.connect(keys.url, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useFindAndModify: false,
     })
-    //const candidate = await User.findOne()
-    // if(!candidate) {
-    //   const user = new User({
-    //     email: 'serhii@mail.ru',
-    //     name: 'serhii',
-    //     cart: {
-    //       items: []
-    //     },
-    //   })
-    //   await user.save()
-    // }
 
-    app.listen(PORT, () => { console.log(`server starts on port : ${PORT}`) })
+    app.listen(keys.PORT, () => { console.log(`server starts on port : ${keys.PORT}`) })
   } catch (error) {
     throw error
   }

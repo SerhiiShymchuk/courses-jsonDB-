@@ -17,7 +17,9 @@
         <div class="card-action actions">
           <a href="/courses/{{_doc._id}}" target="_blank">Відкрити</a>
           {{#if @root.isAuth}}
-            <a href="/courses/{{_doc._id}}/edit?allow=true">Редагувати</a>
+            {{#ifeq _doc.userId._doc._id @root.userId}}
+              <a href="/courses/{{_doc._id}}/edit?allow=true">Редагувати</a>
+            {{/ifeq}}
             <form action="/card/add" method="post">
               <input type="text" hidden name="id" value="{{_doc._id}}">
               <input type="hidden" name="_csrf" value="{{@root.csrf}}">

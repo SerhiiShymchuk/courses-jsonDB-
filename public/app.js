@@ -22,9 +22,7 @@ if(location.href.endsWith('/card')) {
             const csrf = e.target.dataset.csrf
             fetch(`/card/remove/${id}`, {
                 method: 'DELETE',
-                headers: {
-                    'X-XSRF-TOKEN': csrf,
-                }
+                headers: {'X-XSRF-TOKEN': csrf,}
             }).then(res => res.json())
             .then(card => {
                 if (card.courses.length) {
