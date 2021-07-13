@@ -1,0 +1,33 @@
+<h2>Профіль</h2>
+<div class="row">
+    <div class="col s6">
+        {{#if user.avatarUrl}}
+            <img src="/{{user.avatarUrl}}" alt="" class="avatar">
+        {{else}}
+            <p>Аватарка відсутня</p>
+        {{/if}}
+    </div>
+    <div class="col s6">
+        <form action="/profile" method="POST" enctype="multipart/form-data">
+            <p>Твій емейл: {{user.email}}</p>
+            <div class="input-field">
+                <input name="name" id="name" type="text" class="validate" required value="{{user.name}}">
+                <label for="name">Твоє ім'я</label>
+                <span class="helper-text" data-error="Введіть ваше ім'я" ></span>
+            </div>
+            <div class="file-field input-field">
+                <div class="btn">
+                    <span>Аватар</span>
+                    <input type="file" name="avatar">
+                </div>
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text">
+                </div>
+            </div>
+
+            <input type="hidden" name="_csrf" value="{{csrf}}">
+
+            <button class="btn btn-primary" type="submit">Змінити</button>
+        </form>
+    </div>
+</div>

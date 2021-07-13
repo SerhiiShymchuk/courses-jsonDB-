@@ -20,6 +20,11 @@
             {{else}}
                 <li><a href="/add">Додати курс</a></li>
             {{/if}}
+            {{#if isprofile}}
+                <li class="active"><a href="/profile">Профіль</a></li>
+            {{else}}
+                <li><a href="/profile">Профіль</a></li>
+            {{/if}}
             {{#if iscard}}
                 <li class="active"><a href="/card">Кошик</a></li>
             {{else}}
