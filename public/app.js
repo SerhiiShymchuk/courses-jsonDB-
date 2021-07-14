@@ -7,13 +7,13 @@ const converter = (price) => {
 };
 
 //ініціалізація табів авторизації
-const instance = M.Tabs.init(document.querySelectorAll('.tabs'));
+if(location.href.includes('/login')) M.Tabs.init(document.querySelectorAll('.tabs'));
 
-[...document.querySelectorAll('.price')].forEach(node => {
-    node.innerText = converter(node.innerText)
-})
 
 if(location.href.endsWith('/card')) {
+    [...document.querySelectorAll('.price')].forEach(node => {
+        node.innerText = converter(node.innerText)
+    })
     const $card = document.querySelector('#card')
     $card.addEventListener('click', (e) => {
         if (e.target.classList.contains('js-remove')) {

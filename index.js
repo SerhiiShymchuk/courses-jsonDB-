@@ -19,6 +19,8 @@ const varMiddleware = require('./middleware/middlewares')
 const fileMiddleware = require('./middleware/file')
 const userMiddleware = require('./middleware/user')
 const errorPage = require('./middleware/errorPage')
+//const helmet = require('helmet')
+const compression = require('compression')
 
 
 
@@ -48,6 +50,7 @@ app.use(session({
 app.use(fileMiddleware.single('avatar'))
 app.use(csrf())
 app.use(flash())
+app.use(compression())
 app.use(varMiddleware)
 app.use(userMiddleware)
 app.use('/', homeRoute)
@@ -58,6 +61,7 @@ app.use('/order', orderRoute)
 app.use('/auth', authRoute)
 app.use('/profile', profileRoute)
 app.use(errorPage)
+//app.use(helmet())
 
   
 start()
