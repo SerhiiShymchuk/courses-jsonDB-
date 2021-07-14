@@ -11,6 +11,7 @@ const orderRoute = require('./routes/order')
 const authRoute = require('./routes/auth')
 const profileRoute = require('./routes/profile')
 const mongoose = require('mongoose')
+const compression = require('compression')
 const csrf = require('csurf')
 const flash = require('connect-flash')
 const session = require('express-session')
@@ -20,7 +21,6 @@ const fileMiddleware = require('./middleware/file')
 const userMiddleware = require('./middleware/user')
 const errorPage = require('./middleware/errorPage')
 //const helmet = require('helmet')
-//const compression = require('compression')
 
 
 
@@ -48,9 +48,9 @@ app.use(session({
   store,
 }))
 app.use(fileMiddleware.single('avatar'))
+app.use(compression())
 app.use(csrf())
 app.use(flash())
-//app.use(compression())
 app.use(varMiddleware)
 app.use(userMiddleware)
 app.use('/', homeRoute)
